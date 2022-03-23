@@ -1,0 +1,249 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\topmargin}{-1.5cm}
+\setlength{\oddsidemargin}{-0.25cm}
+\setlength{\evensidemargin}{-0.25cm}
+\setlength{\textheight}{25cm}
+\setlength{\textwidth}{17cm}
+\setlength{\parindent}{0.cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%list環境の微小修正
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\leftmargini   3zw%%   25pt
+\leftmarginii  2zw%%   22pt
+\leftmarginiii 2zw%%   18.7pt
+\leftmarginiv  2zw%%   17pt
+\leftmarginv   1zw%%   10pt
+\leftmarginvi  1zw%    10pt
+\leftmargin=\leftmargini
+\labelwidth=\leftmargini\advance\labelwidth-\labelsep
+\labelsep      1zw%%    5pt
+
+\def\@listI{%%
+\leftmargin\leftmargini
+\parsep \z@%%                      4pt plus 2pt minus 1pt
+\topsep 6pt plus 2pt minus 2pt%%   8pt plus 2pt minus 4pt
+\itemsep 0pt plus 2pt \relax}%%    4pt plus 2pt minus 1pt
+\let\@listi=\@listI
+\@listi 
+
+\def\@listii{%%
+\leftmargin\leftmarginii
+ \labelwidth\leftmarginii\advance\labelwidth-\labelsep
+ \topsep 2pt plus 1pt minus 1pt%%  4pt plus 2pt minus 1pt
+ \parsep \z@%%                     2pt plus 1pt minus 1pt
+ \itemsep =0pt plus 1pt\relax}
+
+ \lstset{language=c,
+ breaklines = true,
+ linewidth=\textwidth,
+ xleftmargin=20pt,
+ xrightmargin=20pt,
+ basicstyle={\footnotesize\ttfamily},
+ identifierstyle={\footnotesize\ttfamily},
+ commentstyle={\footnotesize\ttfamily},
+ keywordstyle={\footnotesize\ttfamily},
+ ndkeywordstyle={\footnotesize\ttfamily},
+ stringstyle={\footnotesize\ttfamily},
+ classoffset=1,
+ frame=tRBl,
+ framesep=5pt,
+ showstringspaces=false,
+ numbers=left,
+ stepnumber=1,
+ tabsize=4
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 脚注を＊付きに
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{*\arabic{footnote}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% section にアンダーライン
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mysection}[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{%
+    \protect\numberline{\thesection}#1}%
+  \par\vspace{4zh}{\Large\bf%
+    \noindent{}\arabic{section}.\hspace{1zw}#1}\\[-1zh]%
+    \rule{\textwidth}{1pt}\par\vspace{-1zh}}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ボールドイタリックにするコマンド
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ボールドイタリック
+\newcommand{\bm}[1]{\mbox{\boldmath \it $#1$}}
+
+% display style の分数表示
+%\newcommand{\dfrac}[2]{\displaystyle{\frac{#1}{#2}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 図表見出しの変更（\bf に）
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\long\def\@makecaption#1#2{%
+ \vskip 5pt
+ \setbox\@tempboxa\hbox{{\bf #1}\hspace{1zw}#2}
+ \ifdim \wd\@tempboxa >\hsize
+ %%\unhbox\@tempboxa\par
+ \hbox to \hsize{\hfil{\bf #1}\hspace{1zw}%%
+    \parbox[t]{0.75\hsize}{#2}\hfil}%%図説の頭をインデントする
+  \else \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+ \fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 図番号，表番号を章番号付きで
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+\renewcommand{\thefigure}{\arabic{section}.\arabic{figure}}
+\renewcommand{\thetable}{\arabic{section}.\arabic{table}}
+\makeatletter
+\@addtoreset{equation}{section}
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+\AtBeginDocument{
+  \renewcommand*{\thelstlisting}{\arabic{section}.\arabic{lstlisting}}%
+  \@addtoreset{lstlisting}{section}
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%表の枠
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcolumntype{I}{!{\vrule width 1.5pt}} % creates a vertical thick bar
+\newlength\savedwidth
+\newcommand{\wcline}[1]{\noalign{\global\savedwidth\arrayrulewidth\global
+\arrayrulewidth 1.5pt}%
+\cline{#1}
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%equarray 微修正（）
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\eqnarray{%%
+ \stepcounter{equation}%%
+ \let\@currentlabel=\theequation
+ \global\@eqnswtrue
+ \global\@eqcnt\z@
+ \tabskip\@centering
+ \let\\=\@eqncr
+ $$\halign to \displaywidth\bgroup\@eqnsel\hskip\@centering
+ $\displaystyle\tabskip\z@{##}$&\global\@eqcnt\@ne
+ %%\hskip 2\arraycolsep 
+ \hfil$\displaystyle{{}##{}}$\hfil
+ &\global\@eqcnt\tw@ $\displaystyle\tabskip\z@{##}$\hfil
+ \tabskip\@centering&\llap{##}\tabskip\z@\cr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ○で囲んだ数字
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\maru}[1]{{\ooalign{\hfill#1\/\hfill\crcr
+	\raise.167ex\hbox{\mathhexbox20D}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 枠有りリターンキー
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\wakureturn}{\raisebox{-2pt}{
+	\setlength{\unitlength}{1pt}
+	\thinlines
+	\begin{picture}(8,8)
+		\put(5,3){\line(0,1){5}}
+		\put(5,3){\vector(-1,0){7}}
+		\put(-4,2){\line(0,1){6}}
+		\put(7,2){\line(0,1){6}}
+		\put(1.5,8){\oval(11,4)[t]}
+		\put(1.5,2){\oval(11,4)[b]}
+	\end{picture}
+	}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 枠有りリターンキー (小さめ)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\wakureturns}{\raisebox{-2pt}{
+	\setlength{\unitlength}{1pt}
+	\thinlines
+	\begin{picture}(6.5,5)
+		\put(4.75,3){\line(0,1){4}}
+		\put(5,3){\vector(-1,0){6.5}}
+		\put(-3.75,2){\line(0,1){5}}
+		\put(6.5,2){\line(0,1){5}}
+		\put(1.5,7){\oval(10,4)[t]}
+		\put(1.5,2){\oval(10,4)[b]}
+	\end{picture}
+	}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 枠なしリターンキー
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\nonreturn}{\raisebox{-2pt}{
+	\setlength{\unitlength}{1pt}
+	\thinlines
+	\begin{picture}(8,8)
+		\put(5,3){\line(0,1){5}}
+		\put(5,3){\vector(-1,0){7}}
+	\end{picture}
+	}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 枠なしリターンキー (小さめ)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\nonreturns}{\raisebox{-2pt}{
+	\setlength{\unitlength}{1pt}
+	\thinlines
+	\begin{picture}(6.5,5)
+		\put(4.75,3){\line(0,1){4}}
+		\put(5,3){\vector(-1,0){6.5}}
+	\end{picture}
+	}}
+
+\newtheorem{problem}{問題}
+%  \renewcommand{\thetheorem}{} % suppress numbering
+  % put a box at the end of theorem
+  \renewcommand{\endproblem}
+
+\newtheorem{example}{例}
+%  \renewcommand{\thetheorem}{} % suppress numbering
+  % put a box at the end of theorem
+  \renewcommand{\endexample}
+
+\newtheorem{mfile}{M ファイル}
+%  \renewcommand{\thetheorem}{} % suppress numbering
+  % put a box at the end of theorem
+  \renewcommand{\endmfile}
+
+\newtheorem{theorem}{定理}
+%  \renewcommand{\thetheorem}{} % suppress numbering
+  % put a box at the end of theorem
+  \renewcommand{\endtheorem}{□\endtrivlist}
+
+\newtheorem{definition}{定義}
+%  \renewcommand{\thedefinition}{} % suppress numbering
+  % put a box at the end of definition
+  \renewcommand{\enddefinition}{■\endtrivlist}
+
+\newtheorem{lemma}{補題}
+%  \renewcommand{\thelemma}{} % suppress numbering
+  % put a box at the end of lemma
+  \renewcommand{\endlemma}{□\endtrivlist}
+
+\makeatletter
+     \renewcommand{\theproblem}{%
+          \arabic{section}.\arabic{problem}}
+     \@addtoreset{problem}{section}
+\makeatother
+
+\makeatletter
+     \renewcommand{\theexample}{%
+          \arabic{section}.\arabic{example}}
+     \@addtoreset{example}{section}
+\makeatother
+
+\makeatletter
+     \renewcommand{\themfile}{%
+          \arabic{section}.\arabic{mfile}}
+     \@addtoreset{mfile}{section}
+\makeatother
