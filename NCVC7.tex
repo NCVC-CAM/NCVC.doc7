@@ -3,41 +3,38 @@
 \usepackage{graphicx}
 \usepackage[dvipdfmx]{color}
 \usepackage{xcolor}
-\usepackage{here} % \begin{figure}[H]
-\usepackage{ascmac} % \boxnote　ほか
+\usepackage{here}
+\usepackage{ascmac}
 \usepackage{array}
 \usepackage{listings, jlisting}
 \usepackage{longtable}
-%% -- \url link
 \usepackage[linkcolor=black]{hyperref}
 \usepackage[hyperrefcolorlinks,os=win]{menukeys}
 \usepackage{pxjahyper}
-%% --
 \usepackage{mymacro}
-%%
 
 \begin{document}
 
 \thispagestyle{empty}
-\input{./part00.tex}
+\input{./cover.tex}
 \newpage
 
 \setcounter{page}{1}
 \pagenumbering{arabic}
-%\input{initial.sty}
-%\input{No1/part10.tex}
-%\newpage
+\input{initial.sty}
+\input{part00.tex}
+\newpage
 
-%\input{initial.sty}
-%\input{No2/part20.tex}
-%\newpage
+\input{initial.sty}
+\input{No1/part10.tex}
+\newpage
 
-%\input{initial.sty}
-%\input{No3/part30.tex}
-%\newpage
+\input{initial.sty}
+\input{No2/part20.tex}
+\newpage
 
-%\input{initial.sty}
-%\input{No4/part40.tex}
-%\newpage
+\input{initial.sty}
+\input{No3/part30.tex}
+\newpage
 
 \end{document}
