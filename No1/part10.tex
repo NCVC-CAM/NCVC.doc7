@@ -11,3 +11,30 @@ InventorからのIGESデータは読めないとのことでした．
 Rhinoceros から出力されるIGESデータも問題なく読めましたが，
 一部NCVCが落ちるデータも確認しました\footnote{例外を捉えられないエラーで調査継続中}．
 保存時のIGESタイプを変更すると読める場合もあったので，適宜対応してください．
+
+\subsection{原点について}
+　2D-CADデータのときは『ORIGINレイヤに円を作図』というNCVCの独自ルールがありましたが，
+3D-CADデータの場合は作図原点がそのまま加工原点（工具の初期位置）になります．
+ただし，Z値については後述する設定でワーク上面をゼロにすることも可能です．
+
+\subsection{荒加工用のガイドカーブ}
+　後述の荒加工用データ生成のでは，その基準となるガイドカーブ（線）が必要です．
+3Dモデルを囲うように作図してください．
+ガイドカーブが円だと荒加工パスがうまく生成できないことを確認しています．
+
+\subsection{Kodatunoライブラリからのメッセージ}
+　処理の途中でKodatunoライブラリからメッセージが表示されることがあります．
+データが欠落していたり，おかしなパスが生成される場合があるのでご注意ください．
+
+\begin{table}[H]
+\centering
+\caption{Kodatunoライブラリのメッセージ一覧}
+\label{tab:kodatuno_msg}
+\begin{tabular}{l|l}
+\hline
+\texttt{NURBS\_FUNC CAUTION: Singler point was ditected.} & 特異点検出により処理を継続できない場合 \\ \hline
+\texttt{NURBS KOD\_ERROR: Intersection points exceeded the} & 交点の数が指定サイズを超えた場合は \\
+\texttt{allocated array length. There is a possibility} & そこまでで強制リターン \\
+\texttt{that you set large ds.} & \\ \hline
+\end{tabular}
+\end{table}
