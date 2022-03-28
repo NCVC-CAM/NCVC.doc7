@@ -2,14 +2,15 @@
 \mysection{3D-CADデータの準備}
 %\vspace*{1zh}
 \subsection{IGESデータについて}
+\label{sec:AboutIGES}
 　現状のKodatunoライブラリで処理できるIGESデータは，NURBSの曲線と曲面のみです．
 お使いのCADデータからIGESデータを出力する際には，NURBSオプションを選択してください．
-ライブラリ開発元からの情報によると，SolidWorks, SolidEdge, CATIAから出力されたIGESデータは問題なく読めるようです．
+Kodatunoライブラリ開発元からの情報によると，SolidWorks, SolidEdge, CATIAから出力されたIGESデータは問題なく読めるようです．
 InventorからのIGESデータは読めないとのことでした．
 
 　筆者は Rhinoceros ver5.0 で動作確認しています．
 Rhinoceros から出力されるIGESデータも問題なく読めましたが，
-一部NCVCが落ちるデータも確認しました\footnote{例外を捉えられないエラーで調査継続中}．
+一部NCVCが落ちるデータも確認しました\footnote{try-catchブロックでも捉えられない例外エラーでNCVCが落ちてしまいます．調査継続中．}．
 保存時のIGESタイプを変更すると読める場合もあったので，適宜対応してください．
 
 \subsection{原点について}
@@ -18,13 +19,21 @@ Rhinoceros から出力されるIGESデータも問題なく読めましたが�
 ただし，Z値については後述する設定でワーク上面をゼロにすることも可能です．
 
 \subsection{荒加工用のガイドカーブ}
-　後述の荒加工用データ生成のでは，その基準となるガイドカーブ（線）が必要です．
+　後述の荒加工用データの生成では，基準となるガイドカーブ（線）が必要です．
 3Dモデルを囲うように作図してください．
 ガイドカーブが円だと荒加工パスがうまく生成できないことを確認しています．
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{No1/fig/fig11.png}
+\caption{サンプル図形}
+\label{fig:sample.iges}
+\end{figure}
+
 \subsection{Kodatunoライブラリからのメッセージ}
-　処理の途中でKodatunoライブラリからメッセージが表示されることがあります．
-データが欠落していたり，おかしなパスが生成される場合があるのでご注意ください．
+　計算処理の途中でKodatunoライブラリからメッセージが表示されることがあります．
+データが欠落していたり，おかしなパスが生成される場合があるので，とくにご注意ください．
+3Dモデルを変更したり，生成後のデータを手作業で修正する必要があるかもしれません．
 
 \begin{table}[H]
 \centering
