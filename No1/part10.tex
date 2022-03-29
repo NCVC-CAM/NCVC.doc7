@@ -8,7 +8,7 @@
 Kodatunoライブラリ開発元からの情報によると，SolidWorks, SolidEdge, CATIAから出力されたIGESデータは問題なく読めるようです．
 InventorからのIGESデータは読めないとのことでした．
 
-　筆者は Rhinoceros ver5.0 で動作確認しています．
+　筆者は Rhinoceros ver5.0 で動作確認しています\footnote{特段推奨しているわけではありません．}．
 Rhinoceros から出力されるIGESデータも問題なく読めましたが，
 一部NCVCが落ちるデータも確認しました\footnote{try-catchブロックでも捉えられない例外エラーでNCVCが落ちてしまいます．調査継続中．}．
 保存時のIGESタイプを変更すると読める場合もあったので，適宜対応してください．
@@ -29,6 +29,10 @@ Rhinoceros から出力されるIGESデータも問題なく読めましたが�
 \caption{サンプル図形}
 \label{fig:sample.iges}
 \end{figure}
+
+\subsection{NCVCの設定ファイルについて}
+　IGESデータと同じ場所に，NCVCの設定ファイル（～.ncvc）が自動的に作られます．
+インストーラ付属のサンプルデータを使用する場合は，ドキュメントフォルダ等の書き込み権限がある場所にコピーしてから使用してください．
 
 \subsection{Kodatunoライブラリからのメッセージ}
 　計算処理の途中でKodatunoライブラリからメッセージが表示されることがあります．
