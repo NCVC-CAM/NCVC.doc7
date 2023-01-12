@@ -1,0 +1,13 @@
+[Settings]
+LineSplit=50
+RoughBallEndmill=3.000
+WorkHeight=15.000
+RoughZcut=1.000
+RoughOffset=1.000
+ContourBallEndmill=3.000
+ContourSpace=0.200
+ContourZmax=15.000
+ContourZmin=0.000
+ContourShift=0.500
+RoughZorigin=1
+ContourZorigin=1
